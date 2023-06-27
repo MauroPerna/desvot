@@ -48,12 +48,12 @@ async function handleEvent() {
 
         const signer = provider.getSigner();
         const desvotWithSigner = desvot.connect(signer);
-        const vrfCoordinatorV2MockWithSigner = vrfCoordinatorV2Mock.connect(signer);
+        // const vrfCoordinatorV2MockWithSigner = vrfCoordinatorV2Mock.connect(signer);
         await desvotWithSigner.requestRandomWords()
         const requestId = await desvotWithSigner.s_requestId();
         console.log("=====>", requestId.toNumber())
         console.log("=====>", desvot.address)
-        await vrfCoordinatorV2MockWithSigner.fulfillRandomWords(requestId, desvot.address)
+        // await vrfCoordinatorV2MockWithSigner.fulfillRandomWords(requestId, desvot.address)
     } catch (error) {
         console.error(error)
     }

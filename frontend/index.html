@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Desvot</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+
+    <nav style="display: flex; justify-content: space-between;">
+        <div style="display: flex; justify-content: flex-start; height: 100%;">
+            <input type="text" id="inputParam">
+            <button onclick="handleEvent()">Enviar </button>
+        </div>
+        <button id="connect_wallet" class="custom-btn btn-pri" onclick="connectMetamask()"><img class="img_metamask" src="./assets/metamask_icon.svg" alt="">Connect</button>
+    </nav>
+
+    <main>
+
+        <div class="cards-list top">
+
+            <div class="card">
+                <div class="card_title title-white">
+                    <p>Candidate</p>
+                </div>
+                <div class="card-body">
+                    <h3 class="title">Commission payment</h3>
+                    <div>
+                        <button id="payFee" class="custom-btn-inv btn-sec" onclick="payFee()">Pay fee</button>
+                    </div>
+                    <div class="divisor"></div>
+                    <h3 class="title">Candidate registration</h3>
+                    <div class="candidate_container">
+                        <label for="register_candidate" class="lbl-candidates">Candidate's address</label>
+                        <input type="text" id="candidate_address_ap">
+                    </div>
+                    <div>
+                        <button onclick="registerCandidate()" class="custom-btn-inv btn-sec">Register</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card_title title-white">
+                    <p>Voters</p>
+                </div>
+                <div class="card-body">
+                    <h3 class="title">Register as a voter</h3>
+                    <div>
+                        <button class="custom-btn-inv btn-sec" onclick="registerVoter()">Register</button>
+                    </div>
+                    <div class="divisor"></div>
+                    <h3 class="title">Vote</h3>
+                    <div>
+                        <input type="text" id="candidate_address_to_vote">
+                        <button class="custom-btn-inv btn-sec" onclick="vote()">Vote candidate</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card_title title-white">
+                    <p>Balotaje</p>
+                </div>
+                <div class="card-body">
+                    <div class="divisor"></div>
+                    <h3 class="title">Vote</h3>
+                    <div>
+                        <input type="text" id="candidate_address_to_vote_balotaje">
+                        <button class="custom-btn-inv btn-sec" onclick="voteBalotaje()">Vote candidate</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card_title title-white">
+                    <p>Voting</p>
+                </div>
+                <div class="card-body">
+                    <h3 class="title">List of options</h3>
+                    <div>
+                        <div>
+                            <button class="custom-btn-inv btn-sec" onclick="startVoting()">Start voting</button>
+                            <button class="custom-btn-inv btn-sec" onclick="consultVoting()">State of voting</button>
+                            <button class="custom-btn-inv btn-sec" onclick="endVoting()">End voting</button>
+                            <button class="custom-btn-inv btn-sec" onclick="consultFee()">Consult fee</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="cards-list bottom">
+            <div class="card-center">
+                <div class="card_title title-white">
+                    <p>Results</p>
+                </div>
+                <div class="card-body">
+                    <div class="cards-list">
+                        <div class="card-results">
+                            <div class="row-results">
+                                <div class="col-result">
+                                    <label class="lbl-results" for="inpt-results">Winner address: </label>
+                                    <input id="winner-add" class="inpt-results result-add" type="text" value="" readonly>
+                                </div>
+                                <div class="col-result">
+                                    <label class="lbl-results" for="inpt-results">Vote count</label>
+                                    <input id="winner-votes" class="inpt-results" type="text" value="" readonly>
+                                </div>
+                            </div>
+                            <div class="row-results">
+                                <div class="col-result">
+                                    <label class="lbl-results" for="inpt-results">Runner-up address</label>
+                                    <input id="runner-up-ad" class="inpt-results result-add" type="text" value="" readonly>
+                                </div>
+                                <div class="col-result">
+                                    <label class="lbl-results" for="inpt-results">Vote count</label>
+                                    <input id="runner-up-votes" class="inpt-results" type="text" value="" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-results">
+                            <div class="row-results">
+                                <div class="content-lbl-result">
+                                    <label class="lbl-results" for="inpt-results">State of voting</label>
+                                </div>
+                                <div class="content-inpt-result">
+                                    <input id="inpt-state-value" class="inpt-results" type="text" readonly>
+                                </div>
+                            </div>
+                            <div class="row-results">
+                                <div class="content-lbl-result">
+                                    <label class="lbl-results" for="inpt-results">Events</label>
+                                </div>
+                                <div class="content-inpt-result">
+                                    <div class="row">
+                                        <label for="inpt-address">Vote for</label>
+                                        <input id="inpt-address" class="inpt-results-vote" type="text" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-results">
+                            <div class="row-results">
+                                <label class="lbl-results" for="inpt-results">Total votes</label>
+                                <input id="total-votes" class="inpt-results" type="text" readonly>
+                            </div>
+                            <div class="row-results">
+                                <label class="lbl-results" for="inpt-results">Total amount</label>
+                                <input id="total-amount" class="inpt-results" type="text" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    <script src="./index.js"></script>
+</body>
+
+</html>
